@@ -193,28 +193,13 @@ public class KamUtilsEndPoint extends WebServiceEndpoint {
         return resp;
     }
 
+    @SuppressWarnings("unused")
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = RELEASE_KAM_REQUEST)
     @ResponsePayload
     public ReleaseKamResponse releaseKam(
             @RequestPayload ReleaseKamRequest request) throws Exception {
-
-        // validate request
-        if (request == null) {
-            throw new MissingRequest(RELEASE_KAM_REQUEST);
-        }
-
-        // Make sure a Kam was specified in the request
-        KamHandle kamHandle = request.getKam();
-        if (null == kamHandle) {
-            throw new KamStoreServiceException("KamHandle payload is missing");
-        }
-
-        // Release the kam
-        kamCacheService.releaseKam(kamHandle.getHandle());
-
-        // Set up the response
-        ReleaseKamResponse response = OBJECT_FACTORY.createReleaseKamResponse();
-        return response;
+        final String msg = "KAMs cannot be released on this server";
+        throw new RequestException(msg);
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = GET_NEW_INSTANCE_REQUEST)

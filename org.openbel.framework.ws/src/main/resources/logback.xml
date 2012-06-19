@@ -9,6 +9,7 @@
 
     <!-- <logger name="org.openbel" level="DEBUG" /> -->
     <!-- <logger name="org.hibernate" level="TRACE" /> -->
+    <logger name="org.openbel.framework.ws.utils.KAMLoader" level="INFO"/>
 
     <root level="WARN">
         <appender-ref ref="STDOUT" />

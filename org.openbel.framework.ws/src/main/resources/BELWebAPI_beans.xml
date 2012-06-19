@@ -23,6 +23,8 @@
         <constructor-arg><null/></constructor-arg>
     </bean>
 
+    <bean id="kamloader" class="org.openbel.framework.ws.utils.KAMLoader"/>
+
     <bean id="databaseService" class="org.openbel.framework.core.df.DatabaseServiceImpl" />
 
     <bean id="dbConnection" factory-bean="databaseService"

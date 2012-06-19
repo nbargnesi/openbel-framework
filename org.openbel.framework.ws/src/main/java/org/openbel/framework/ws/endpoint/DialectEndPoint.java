@@ -41,7 +41,6 @@ import java.util.List;
 import org.openbel.framework.api.Dialect;
 import org.openbel.framework.api.Kam;
 import org.openbel.framework.api.KamCacheService;
-import org.openbel.framework.api.KamStoreException;
 import org.openbel.framework.common.model.Namespace;
 import org.openbel.framework.ws.core.MissingRequest;
 import org.openbel.framework.ws.core.RequestException;
@@ -114,66 +113,29 @@ public class DialectEndPoint extends WebServiceEndpoint {
         return resp;
     }
 
+    @SuppressWarnings("unused")
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = GET_CUSTOM_DIALECT_REQUEST)
     @ResponsePayload
     public
             GetCustomDialectResponse getCustomDialect(
                     @RequestPayload GetCustomDialectRequest request)
                     throws RequestException {
-
-        if (request == null) {
-            throw new MissingRequest(GET_CUSTOM_DIALECT_REQUEST);
-        }
-
-        Kam kam = kamCache.getKam(request.getKam().getHandle());
-        if (kam == null) {
-            throw new RequestException("Invalid KamHandle: "
-                    + request.getKam().getHandle());
-        }
-
-        List<Namespace> geneNamespaces = convert(request.getGeneNamespaces());
-        List<Namespace> bpNamespaces = convert(request.getBpNamespaces());
-        List<Namespace> chemNamespaces = convert(request.getChemNamespaces());
-
-        Dialect d;
-        try {
-            d =
-                    dialectFactory.createCustomDialect(kam.getKamInfo(),
-                            geneNamespaces, bpNamespaces, chemNamespaces,
-                            Converter.convert(request.getSyntax()),
-                            request.isHideNamespacePrefixes());
-        } catch (KamStoreException e) {
-            throw new RequestException("Failed to construct dialect", e);
-        }
-
-        GetCustomDialectResponse resp =
-                OBJECT_FACTORY.createGetCustomDialectResponse();
-        DialectHandle dh = OBJECT_FACTORY.createDialectHandle();
-        dh.setHandle(dialectService.cacheDialect(d));
-        resp.setDialect(dh);
-        return resp;
+        final String msg = "Custom dialects cannot be used on this server";
+        throw new RequestException(msg);
     }
 
+    @SuppressWarnings("unused")
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = RELEASE_DIALECT_REQUEST)
     @ResponsePayload
     public
             ReleaseDialectResponse releaseDialect(
                     @RequestPayload ReleaseDialectRequest request)
                     throws RequestException {
-
-        if (request == null) {
-            throw new MissingRequest(RELEASE_DIALECT_REQUEST);
-        }
-
-        DialectHandle dialect = request.getDialect();
-
-        // Release the kam
-        dialectService.releaseDialect(dialect.getHandle());
-
-        // Set up the response
-        return OBJECT_FACTORY.createReleaseDialectResponse();
+        final String msg = "Dialects cannot be released on this server";
+        throw new RequestException(msg);
     }
 
+    @SuppressWarnings("unused")
     private List<Namespace> convert(
             List<org.openbel.framework.ws.model.Namespace> ws) {
         if (ws == null || ws.isEmpty()) {
