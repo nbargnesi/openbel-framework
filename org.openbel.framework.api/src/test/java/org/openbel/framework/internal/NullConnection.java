@@ -52,6 +52,7 @@ import java.sql.Statement;
 import java.sql.Struct;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.Executor;
 
 public class NullConnection implements Connection {
 
@@ -461,6 +462,39 @@ public class NullConnection implements Connection {
     public Struct createStruct(String typeName, Object[] attributes)
             throws SQLException {
         return null;
+    }
+
+    @Override
+    public void setSchema(String schema) throws SQLException {
+    }
+
+    @Override
+    public String getSchema() throws SQLException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void abort(Executor executor) throws SQLException {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setNetworkTimeout(Executor executor, int milliseconds)
+            throws SQLException {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getNetworkTimeout() throws SQLException {
+        return 0;
     }
 
 }

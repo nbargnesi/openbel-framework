@@ -868,4 +868,19 @@ public class NullPreparedStatement implements PreparedStatement {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void closeOnCompletion() throws SQLException {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isCloseOnCompletion() throws SQLException {
+        return false;
+    }
+
 }
