@@ -10,6 +10,8 @@
     <!-- <logger name="org.openbel" level="DEBUG" /> -->
     <!-- <logger name="org.hibernate" level="TRACE" /> -->
     <logger name="org.openbel.framework.ws.utils.KAMLoader" level="INFO"/>
+    <logger name="org.springframework.ws.server.MessageTracing.received" level="TRACE"/>
+    <logger name="org.springframework.ws.server.MessageTracing.sent" level="TRACE"/>
 
     <root level="WARN">
         <appender-ref ref="STDOUT" />

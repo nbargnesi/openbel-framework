@@ -21,4 +21,10 @@
     <!-- Exception resolver used for customizing soap fault messages -->
     <bean id="exceptionResolver" class="org.openbel.framework.ws.core.CustomizeSoapFaultExceptionResolver" />
 
+    <sws:interceptors>
+        <bean class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor">
+            <property name="logRequest" value="true"/>
+        </bean>
+    </sws:interceptors>
+
 </beans>
